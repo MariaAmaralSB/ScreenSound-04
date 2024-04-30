@@ -1,26 +1,37 @@
-﻿
+﻿using System.Text.Json.Serialization;
 
-using System.Text.Json.Serialization;
+namespace ScreenSound_04.Modelos;
 
-namespace ScreenSound_04.Modelos
+internal class Musica
 {
-    internal class Musicas
-    {
-        [JsonPropertyName("song")]
-        public string? Nome { get; set; }
-        [JsonPropertyName("artist")]
-        public string? Artista { get; set; }
-        [JsonPropertyName("duration_ms")]
-        public int? Duracao{ get; set; }
-        [JsonPropertyName("genre")]
-        public string Genero { get; set; }
+    private string [] tonalidades = { "C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B" };
 
-        public void ExibirDetalhesdaMusica()
+    [JsonPropertyName("song")]
+    public string? Nome { get; set; }
+    [JsonPropertyName("artist")]
+    public string? Artista { get; set; }
+
+    [JsonPropertyName("duration_ms")]
+    public int Duracao { get; set; }
+    [JsonPropertyName("genre")]
+    public string? Genero { get; set; }
+
+    [JsonPropertyName("key")]
+    public int Key { get; set; }
+
+    public string Tonalidade
+    {
+        get
         {
-            Console.WriteLine($"Artista: {Artista}");
-            Console.WriteLine($"Musica: {Nome}");
-            Console.WriteLine($"Duraçãp: {Duracao /1000}");
-            Console.WriteLine($"Genero musica: {Genero}");
+            return tonalidades [Key];
         }
+    }
+    public void ExibirDetalhesDaMusica()
+    {
+        Console.WriteLine($"Artista: {Artista}");
+        Console.WriteLine($"Música: {Nome}");
+        Console.WriteLine($"Duração em segundos: {Duracao/1000}");
+        Console.WriteLine($"Gênero musical: {Genero}");
+        Console.WriteLine($"Tonalidade: {Tonalidade}");
     }
 }
